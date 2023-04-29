@@ -1,0 +1,139 @@
+<!----
+{% include 'home.html' %}
+{% block content %}
+<form action="" method="post">
+    {% csrf_token %}
+    {% for field in form %}
+        {{field.label}}
+        {{field}}
+    {% endfor %}
+    <input type="submit" value="submit">
+</form>
+
+
+{% endblock %}
+----->
+
+
+<!------
+{% include 'home.html' %}
+{% block content %}
+<h1>LogIn</h1>
+<form action="" method="post">
+    {% csrf_token %}
+    Username: <input type="text" name="username">
+    <br> <br>
+    Passwrod: <input type="text" name="password">
+    <br> <br>
+    <input type="submit" value="submit">
+</form>
+{% endblock %}
+------->
+
+
+!----
+{% include 'home.html' %}
+{% load static %}
+{% static "images" as baseUrl %}
+{% block content %}
+
+    <table class="table">
+        <tbody>
+          <tr>
+              {% for category in categories %}
+                <td><a href="{% url 'get_by_category' category.id %}" style="color:black;border:1px solid;padding:10px;border-radius:7px;box-shadow:0 5px 10px 0px rgba(0,0,0,0.7);">{{category.name}}</a></td>
+              {% endfor %}
+          </tr>
+        </tbody>
+    </table>
+    <div class="row" style="margin:10px;">
+    {% for item in products %}
+            <div class="col-sm-4">
+                <div class="thumbnail">
+                    <img src="{{baseUrl}}/{{item.product_image}}" alt="Product 1" height="150px" width="300px">
+                <div class="caption">
+                    <h3>{{item.product_name}}</h3>
+                    <p>${{item.price}}</p>
+                    <form action="{% url 'add_to_cart' item.id %}" method="post">
+                        {% csrf_token %}
+                        <input type="submit" value="AddToCart"  class="btn btn-warning">
+                    </form>
+                </div>
+                </div>
+            </div>
+    {% endfor %}
+    </div>
+
+{% endblock %}
+------>
+
+
+<input type="submit" value="AddToCart"  class="btn btn-warning">
+
+<form action="{% url 'add_to_cart' item.id %}" method="post">
+            {% csrf_token %}
+             <a class="button" href="#">Buy Now</a>
+             <input type="submit" value="AddToCart"  class="btn btn-warning">
+        </form>
+
+
+
+        !---
+{% include 'home.html' %}
+{% load static %}
+{% static "images" as baseUrl %}
+{% block content %}
+<div class="row">
+	<div class="col-lg-12">
+		<div class="box-element">
+            <a  class="btn btn-outline-dark" href="{% url 'store_products' %}">&#x2190; Continue Shopping</a>
+            <br> <br>
+            <table class="table">
+                <tr>
+                    <th><h5>Items: <strong>{{items_total}}</strong></h5></th>
+                    <th><h5>Total:<strong> ${{cart_total}}</strong></h5></th>
+                    <th>
+                        <a  style="float:right; margin:5px;" class="btn btn-success" href="{% url 'checkout' %}">Checkout</a>
+                    </th>
+                </tr>
+            </table>
+		</div>
+
+		<br>
+    </div>
+
+    <div class="container">
+          <h2>Shopping Bag</h2>
+          <table class="table">
+            <thead>
+              <tr class="warning">
+                <th>Item</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                  <th>Date</th>
+                  <th>Total</th>
+                  <th>Status</th>
+              </tr>
+            </thead>
+
+            <tbody>
+            {% for order in cart_items %}
+              <tr class="info">
+                <td><img src="{{baseUrl}}/{{order.products.product_image}}" height="50px" style="border-radius:15px;"></td>
+                  <td><strong>${{order.products.price}}</strong></td>
+                <td>{{order.quantity}}  <a href="{% url 'increase_quantity' order.products.id %}"><img src="{% static 'images/arrow-up.png' %}" height="10px"></a> <a href="{% url 'decrease_quantity' order.products.id %}"><img src="{% static 'images/arrow-down.png' %}" height="10px"> </a></td>
+                  <td>{{order.date}}</td>
+                <td>${{order.get_total}}</td>
+                  {% if order.status %}
+                  <td><span class="badge bg-success" style="background-color:green;">completed</span></td>
+                  {% else %}
+                  <td><span class="badge bg-info" style="background-color:red;">pending</span></td>
+                  {% endif %}
+              </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
+--->

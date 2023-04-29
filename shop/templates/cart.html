@@ -1,0 +1,75 @@
+
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+{% static "images" as baseUrl %}
+
+<head>
+     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Cart</title>
+</head>
+
+<body>
+{% include 'navbar.html' %}
+
+
+<div class="row">
+	<div class="col-lg-12">
+		<div class="box-element">
+            <a  class="btn btn-outline-dark" href="{% url 'store_products' %}">&#x2190; Continue Shopping</a>
+            <br> <br>
+            <table class="table">
+                <tr>
+                    <th><h5>Items: <strong>{{items_total}}</strong></h5></th>
+                    <th><h5>Total:<strong> ${{cart_total}}</strong></h5></th>
+                    <th>
+                        <a  style="float:right; margin:5px; color:white;" class="btn btn-success" href="{% url 'checkout' %}">Checkout</a>
+                    </th>
+                </tr>
+            </table>
+		</div>
+
+		<br>
+    </div>
+
+    <div class="container">
+          <h2>Shopping Bag</h2>
+          <table class="table">
+            <thead>
+              <tr class="warning">
+                <th>Item</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                  <th>Date</th>
+                  <th>Total</th>
+                  <th>Status</th>
+              </tr>
+            </thead>
+
+            <tbody>
+            {% for order in cart_items %}
+              <tr class="info">
+                <td><img src="{{baseUrl}}/{{order.products.product_image}}" height="50px" style="border-radius:15px;"></td>
+                  <td><strong>${{order.products.price}}</strong></td>
+                <td>{{order.quantity}}  <a href="{% url 'increase_quantity' order.products.id %}"><img src="{% static 'images/arrow-up.png' %}" height="10px"></a> <a href="{% url 'decrease_quantity' order.products.id %}"><img src="{% static 'images/arrow-down.png' %}" height="10px"> </a></td>
+                  <td>{{order.date}}</td>
+                <td>${{order.get_total}}</td>
+                  {% if order.status %}
+                  <td><span class="badge bg-success" style="background-color:green;">completed</span></td>
+                  {% else %}
+                  <td><span class="badge bg-info" style="background-color:red;">pending</span></td>
+                  {% endif %}
+              </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+{% include 'footer.html' %}
+</body>
+</html>

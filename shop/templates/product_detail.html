@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+{% static "images" as baseUrl %}
+<head>
+    <meta charset="UTF-8">
+    <title>ProductDetail</title>
+</head>
+<style>
+    .productDetails{
+        width:50%;
+    }
+    button{
+        cursor: pointer;
+        height: 45px;
+        width: 20%;
+        border-radius: 6px;
+        background-color: pink;
+        color: white;
+        font-size: 1.9rem;
+        font-family: 'Brush Script MT', cursive;
+    }
+    .productDetails img{
+        height:350px;
+        width:350px;
+        border-radius:7px;
+        box-shadow: 0 0px 0px 10px rgba(0, 0, 0, 0);
+        transition: height 1s,box-shadow 1s;
+    }
+    p{
+        color:black;
+        box-shadow: 0 0px 0px 10px rgba(0, 0, 0, 0);
+        transition:box-shadow 1s,color 1s;
+    }
+    p:hover{
+        color:red;
+        font-size:1.8rem;
+        box-shadow: 0 5px 30px 10px rgba(0, 0, 0, 0.7);
+    }
+
+    .productDetails img:hover{
+        box-shadow: 0 5px 30px 10px rgba(0, 0, 0, 0.7);
+        height: 380px;
+    }
+    button:hover{
+        background-color:red;
+        color:white;
+    }
+</style>
+<body>
+
+{% include 'navbar.html' %}
+
+{% block content %}
+<center>
+    <div class="productDetails">
+      <h1>{{ product.name }}</h1>
+      <img src="{{baseUrl}}/{{product.product_image}}" alt="{{ product.name }}">
+        <div><strong><p>{{product.product_name}}</strong></p></div>
+      <p>This {{product.product_name}} is made from high-quality black leather <br>and
+          features a classic design with a silver buckle. <br>
+          It comes in a range of sizes to fit any waist.</p>
+        <p><strong>Price: ${{ product.price }}</strong></p>
+        <button><a href="{% url 'add_to_cart' product.id %}" class="button"></a>Buy Now</button>
+    </div>
+</center>
+{% endblock %}
+
+{% include 'footer.html' %}
+
+</body>
+</html>

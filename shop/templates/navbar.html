@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+{% load static %}
+{% static "images" as baseUrl %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>NavBar</title>
+    <style>
+        nav ul li a{
+            border-bottom:0px solid white;
+            transition: border-bottom 0.2s;
+        }
+        nav ul li a:hover{
+            border-bottom:2.6px solid white;
+        }
+    </style>
+
+</head>
+<body>
+
+{% block content%}
+<!---NavBar---->
+    <nav class="navbar navbar-default" style="background-color:black;">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="{% url 'home' %}" style="color:white;"><img src="{% static 'system_images/shopwave.png' %}" height="20px;">Shopwave</a>
+            </div>
+            <ul class="nav navbar-nav">
+              <li><a href="{% url 'log_in' %}" style="color:white;font-size:19px;">Login</a></li>
+                <li><a href="{% url 'store_products' %}" style="color:white;font-size:19px;">Products</a></li>
+                <li style="margin-left:900px;"><a href="{% url 'cart_content' %}"><img src="{% static 'images/cart.png' %}" height="30px">${{items_total}}</a></li>
+                <li><a href="{% url 'signup' %}"><i class="fa fa-user-plus" style="font-size:24px;color:white"></i></a></li>
+                <li><a href="{% url 'logout' %}" style="font-size:14px;color:white"><i class="fa fa-sign-out"></i>Logout</a></li>
+            </ul>
+        </div>
+    </nav>
+<!---End of Navbar--->
+
+{% endblock %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+</body>
+</html>

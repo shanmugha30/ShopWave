@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+{% static "images" as baseUrl %}
+<head>
+     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Home</title>
+</head>
+<!--style---->
+<style>
+main section a{
+    padding: 1%;
+}
+main section h2{
+    background-color: rgb(255, 255, 102);
+    padding: 1% 0.75%;
+    border-radius: 10px;
+    text-align: center;
+    color: red;
+    font-family: 'Rock Salt', cursive;
+    margin-top: 1%;
+    margin-bottom: 1%;
+}
+footer{
+    margin-top: 1%;
+    text-align: left;
+    padding: 1% 0.75%;
+    background-color: red;
+    border-radius: 10px;
+}
+footer a{
+    color: burlywood;
+    text-decoration: none;
+    font-family: 'BrushScript MT', cursive;
+    font-size: 125%;
+    padding: 3%;
+}
+.container{
+    width: 85%;
+    height: 450px;
+    margin: auto;
+    overflow: hidden;
+    position: relative;
+    border-radius: 20px;
+    padding-bottom: 1%;
+    background-image:linear-gradient(to right,white,aqua);
+}
+.slide{
+    width: 60%;
+    height: 55%;
+    display: flex;
+}
+.slide img{
+    width: 100%;
+    height: auto;
+    border-radius:10px;
+    margin:14px;
+}
+.slide img:hover{
+    height:70%;
+}
+#Prev{
+    position: absolute;
+    top: 35%;
+    left: 2%;
+    z-index: 10;
+    color: orangered;
+    cursor: pointer;
+}
+#Next{
+    position: absolute;
+    top: 35%;
+    right: 2%;
+    z-index: 10;
+    color: orangered;
+    cursor: pointer;
+}
+.search{
+    display: flex;
+    margin-bottom: 1%;
+    justify-content: center;
+}
+input{
+    width: 50%;
+    padding: 1% 0.75%;
+    text-align: left;
+    border-radius: 5px;
+}
+.fa-search{
+    color: rgb(12, 58, 58);
+}
+button :hover{
+    cursor: pointer;
+}
+footer a :hover{
+    color: wheat;
+    cursor: pointer;
+}
+
+  </style>
+<!---end style shett-->
+<body>
+
+{% include 'navbar.html' %}
+<center>
+    <div style="font-size:2rem;padding:20px;font-family:'Brush Script MT',cursive;box-shadow: 0 5px 30px 10px rgba(0, 0, 0, 0.7);width:50%">Welcome back <strong>{{request.user}}</strong>, we're thrilled to see you again!<br>
+        We are glad you are here again.Thanks for choosing our website.</div>
+</center>
+<!---Main Container----->
+
+<main>
+        <section>
+            <div class="container">
+                <i style='font-size:48px'  id="Prev" class="fas">< </i>
+                <i style='font-size:48px' class='fas' id="Next">></i>
+                <h1 style="color:red;">Hot Sales</h1>
+                <div class="slide">
+                    <img src="{% static 'system_images/black.png' %}" alt="Kushaq" id="lastclone">
+                    <img src="{% static 'system_images/blue.png' %}" alt="Creta" >
+                    <img src="{% static 'system_images/skyblue.png' %}" alt="Harrrier" >
+                    <img src="{% static 'system_images/pink.png' %}" alt="Hector" >
+                    <img src="{% static 'system_images/fastrack.png' %}" alt="Kushaq" >
+                    <img src="{% static 'system_images/darkblue.png' %}" alt="Kushaq" >
+                    <img src="{% static 'system_images/rcb.png' %}" alt="Creta" >
+                    <img src="{% static 'system_images/digital.png' %}" alt="Kushaq" >
+                    <img src="{% static 'system_images/silver.png' %}" alt="Creta" id="firstclone" >
+                </div>
+            </div>
+            <br>
+        </section>
+
+        <section style="margin:70px;">
+            <h1>Featured Products</h1>
+            <div class="row">
+          {% for product in products %}
+            <div class="col-md-4" style="margin:15px;border:1px solid gray;box-shadow:0 5px 15px gray;border-radius:8px;">
+              <div class="card mb-4 shadow-sm">
+                <img class="card-img-top" src="{{baseUrl}}/{{product.product_image}}" alt="{{ product.name }}" height="330px" style="border-radius:9px;">
+                <div class="card-body">
+                  <h5 class="card-title">{{ product.name }}</h5>
+                  <p>This {{product.product_name}} is made from high-quality black leather <br>and
+                      features a classic design with a silver buckle. <br>
+                      It comes in a range of sizes to fit any waist.</p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                      <a href="{% url 'product_detail' product.slug %}" class="btn btn-primary" style="margin:10px;">View</a>
+                    </div>
+                    <small class="text-muted">${{ product.price }}</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+            </div>
+        </section>
+</main>
+<!---End main container--->
+{% include 'footer.html' %}
+
+<script src="{% static 'js/webdev.js' %}"></script>
+
+</body>
+</html>

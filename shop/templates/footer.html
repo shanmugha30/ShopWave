@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+{% load static %}
+{% static "images" as baseUrl %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
+    <title>Footer</title>
+    <style>
+        .footer{
+            border-top:1px solid black;
+            margin:30px;
+        }
+        .maincontainer{
+            margin:20px;
+        }
+        .maincontainer div{
+            display:flex;
+            flex-direction:column;
+        }
+        .table{
+            margin:10px;
+            border:None;
+        }
+        .table th{
+            color:green;
+            font-size:1.5rem;
+        }
+        .table a{
+            color:gray;
+        }
+        .fa{
+            color:red;
+            font-size:20px;
+        }
+        .icons img{
+            margin:10px;
+        }
+    </style>
+</head>
+<body>
+
+<section class="footer">
+    <div class="maincontainer">
+        <div class="socialmedia">
+            <div>
+                <span><i class="fa fa-marker"></i>A-143, 9th Floor, Sovereign Corporate Tower,<br>Sector-136, Noida, Uttar Pradesh - 201305</span>
+
+                <br><br>
+                <span><i class="fa fa-envelope"></i><a style="margin-left:5px;color:gray;">feedback@shopwave.com</a></span>
+            </div>
+        </div>
+
+        <div class="subcontainer">
+            <table class="table">
+                <tr>
+                    <th>Company</th>
+                    <th>News</th>
+                    <th>Contribute</th>
+                    <th>Social Media</th>
+                </tr>
+
+                <tr>
+                    <td><a>About Us</a></td>
+                    <td><a href="#">Top News</a></td>
+                    <td><a>Write an Review</a></td>
+                    <td><a>&#xf09a;Facebook</a></td>
+                </tr>
+
+                <tr>
+                    <td><a>In Media</a></td>
+                    <td><a>Business</a></td>
+                    <td><a>Deals</a></td>
+                    <td><a>Instagram</a></td>
+                </tr>
+
+                <tr>
+                    <td><a>Contact Us</a></td>
+                    <td><a>Finance</a></td>
+                    <td><a>Delivery Review</a></td>
+                    <td><a>Youtube</a></td>
+                </tr>
+
+                <tr>
+                    <td><a>Privacy Policy</a></td>
+                    <td><a href="#">Lifestyle</a></td>
+                    <td><a>Top Products</a></td>
+                    <td><a>LinkedIn</a></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <center>
+        <span><a>Made With <i class="fa fa-heart"></i> @Shopwave</a></span>
+    </center>
+    <div style="margin-top:10px;background-color:green;width:100%">s</div>
+</section>
+
+</body>
+</html>

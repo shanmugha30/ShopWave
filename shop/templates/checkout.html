@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    {% static "images" as baseUrl %}
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <title>Checkout</title>
+</head>
+<body>
+{% include 'navbar.html' %}
+<div class="row">
+	<div class="col-lg-6">
+		<div class="box-element" id="form-wrapper">
+            <form id="form">
+                <div id="user-info">
+                    <div class="form-field">
+                        <input required class="form-control" type="text" name="name" placeholder="Name..">
+                    </div>
+                    <div class="form-field">
+                        <input required class="form-control" type="email" name="email" placeholder="Email..">
+                    </div>
+                </div>
+
+                <div id="shipping-info">
+                    <hr>
+                    <p>Shipping Information:</p>
+                    <hr>
+                    <div class="form-field">
+                        <input class="form-control" type="text" name="address" placeholder="Address..">
+                    </div>
+                    <div class="form-field">
+                        <input class="form-control" type="text" name="city" placeholder="City..">
+                    </div>
+                    <div class="form-field">
+                        <input class="form-control" type="text" name="state" placeholder="State..">
+                    </div>
+                    <div class="form-field">
+                        <input class="form-control" type="text" name="zipcode" placeholder="Zip code..">
+                    </div>
+                </div>
+                <hr>
+                <input id="form-button" class="btn btn-success btn-block" type="submit" value="Continue">
+            </form>
+        </div>
+
+        <br>
+        <div class="box-element hidden" id="payment-info">
+            <small>Paypal Options</small>
+        </div>
+
+	</div>
+
+	<div class="col-lg-6">
+		<div class="box-element">
+            <a  class="btn btn-outline-dark" href="{% url 'cart_content' %}">&#x2190; Back to Cart</a>
+            <hr>
+            <h3>Order Summary</h3>
+            <hr>
+            {% for order in orders %}
+            {% if order.status == False %}
+            <div class="cart-row">
+                <div style="flex:2"><img class="row-image" src="{{baseUrl}}/{{order.products.product_image}}" height="35px" width="90px"></div>
+                <div style="flex:2"><p>{{order.products.product_name}}</p></div>
+                <div style="flex:1"><p>{{order.products.price}}</p></div>
+                <div style="flex:1"><p>x{{order.quantity}}</p></div>
+            </div>
+            {% endif %}
+            {% endfor %}
+            <h5>Items:   <strong>{{item_total}}</strong></h5>
+            <h5>Total:   <strong>${{cart_total}}</strong></h5>
+		</div>
+	</div>
+</div>
+
+
+
+</body>
+</html>
